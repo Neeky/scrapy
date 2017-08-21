@@ -3,6 +3,7 @@ This is the Scrapy engine which controls the Scheduler, Downloader and Spiders.
 
 For more information see docs/topics/architecture.rst
 
+定义scrapy引擎、它负责调度器，下载器，爬虫
 """
 import logging
 from time import time
@@ -22,10 +23,13 @@ logger = logging.getLogger(__name__)
 
 
 class Slot(object):
-
+    """
+    Slot类用于管理请求
+    """
     def __init__(self, start_requests, close_if_idle, nextcall, scheduler):
         self.closing = False
         self.inprogress = set() # requests in progress
+        #第一个请求对应着inprogress中的一个元素
         self.start_requests = iter(start_requests)
         self.close_if_idle = close_if_idle
         self.nextcall = nextcall
