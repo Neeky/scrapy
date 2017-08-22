@@ -29,11 +29,15 @@ class Spider(object_ref):
         """
         初始化Spider类，并保证name,start_urls被赋值
         """
+        #如果传入的name值不为空，那么就设置self.name为name
+        #如果传入的name值为空  ，那么就测试有没有在类级别设置name的值
         if name is not None:
             self.name = name
         elif not getattr(self, 'name', None):
             raise ValueError("%s must have a name" % type(self).__name__)
+        #根据kwargs更新实例的属性与值
         self.__dict__.update(kwargs)
+        #测试是否有start_urls属性，如果没有就，增加并把属性的值设置为[]
         if not hasattr(self, 'start_urls'):
             self.start_urls = []
 
