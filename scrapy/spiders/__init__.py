@@ -26,6 +26,9 @@ class Spider(object_ref):
     custom_settings = None
 
     def __init__(self, name=None, **kwargs):
+        """
+        初始化Spider类，并保证name,start_urls被赋值
+        """
         if name is not None:
             self.name = name
         elif not getattr(self, 'name', None):
@@ -36,6 +39,9 @@ class Spider(object_ref):
 
     @property
     def logger(self):
+        """
+        通过logging模块取得log对象
+        """
         logger = logging.getLogger(self.name)
         return logging.LoggerAdapter(logger, {'spider': self})
 
