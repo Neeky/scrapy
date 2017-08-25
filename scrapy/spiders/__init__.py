@@ -60,6 +60,10 @@ class Spider(object_ref):
 
     @classmethod
     def from_crawler(cls, crawler, *args, **kwargs):
+        """
+        类方法、这个方法的作用是通过crawler参数来完成一个Spider对象的初始化.
+        crawler 参数设置为Spider对象crawler属性的值
+        """
         spider = cls(*args, **kwargs)
         spider._set_crawler(crawler)
         return spider
@@ -79,6 +83,9 @@ class Spider(object_ref):
         crawler.signals.connect(self.close, signals.spider_closed)
 
     def start_requests(self):
+        """
+        生成器函数、返回由start_url确定的Request对象
+        """
         cls = self.__class__
         if method_is_overridden(cls, Spider, 'make_requests_from_url'):
             warnings.warn(
@@ -99,6 +106,9 @@ class Spider(object_ref):
         return Request(url, dont_filter=True)
 
     def parse(self, response):
+        """
+        抽取数据时的逻辑、交由子类实现。
+        """
         raise NotImplementedError
 
     @classmethod
@@ -125,6 +135,9 @@ BaseSpider = create_deprecated_class('BaseSpider', Spider)
 
 
 class ObsoleteClass(object):
+    """
+    只包了一个message属性，好像没有什么用!
+    """
     def __init__(self, message):
         self.message = message
 
