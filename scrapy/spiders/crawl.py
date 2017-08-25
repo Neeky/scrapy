@@ -97,6 +97,10 @@ class CrawlSpider(Spider):
 
     @classmethod
     def from_crawler(cls, crawler, *args, **kwargs):
+        """
+        overried 基类的 from_crawler 方法、返回自己类的一个实例.
+        """
+        #super(type, type2) -> bound super object; requires issubclass(type2, type)
         spider = super(CrawlSpider, cls).from_crawler(crawler, *args, **kwargs)
         spider._follow_links = crawler.settings.getbool(
             'CRAWLSPIDER_FOLLOW_LINKS', True)
