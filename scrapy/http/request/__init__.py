@@ -15,6 +15,13 @@ from scrapy.http.common import obsolete_setter
 
 
 class Request(object_ref):
+    """
+    这个Request并不会真正的处理http整个过程，而只是保存了一些元数据
+    url
+    encoding
+    cookies
+    headers
+    """
 
     def __init__(self, url, callback=None, method='GET', headers=None, body=None,
                  cookies=None, meta=None, encoding='utf-8', priority=0,
